@@ -1,0 +1,132 @@
+:root {
+  --mh-safe-top: env(safe-area-inset-top, 0px);
+  --mh-safe-bottom: env(safe-area-inset-bottom, 0px);
+  --mh-content-max: 480px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+/* Co giãn cỡ chữ gốc theo bề rộng màn hình từng điện thoại:
+   - iPhone SE / màn nhỏ (~360px): chữ nhỏ lại một chút
+   - Điện thoại lớn / tablet: chữ lớn hơn, nhưng có giới hạn trên/dưới */
+html {
+  font-size: clamp(14px, 3.7vw, 17px);
+}
+
+.page {
+  padding: 16px 16px calc(88px + var(--mh-safe-bottom)) 16px;
+  padding-top: max(16px, var(--mh-safe-top));
+  max-width: var(--mh-content-max);
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Màn hình rộng (tablet, máy gập) vẫn giữ layout gọn ở giữa thay vì kéo giãn hết cỡ */
+@media (min-width: 600px) {
+  :root {
+    --mh-content-max: 560px;
+  }
+}
+
+.section-container {
+  padding: 16px;
+  background: #ffffff;
+  border-radius: 8px;
+  margin-bottom: 24px;
+}
+
+.zaui-list-item {
+  cursor: pointer;
+}
+
+/* Lưới menu tự động co giãn số cột theo bề rộng màn hình,
+   không cần media query riêng cho từng dòng máy */
+.mh-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 12px;
+}
+
+/* Thanh điều hướng dưới cùng: chừa khoảng an toàn cho các dòng máy có
+   thanh cử chỉ / vạch home (iPhone X trở lên, Android gesture nav) */
+.mh-bottom-nav {
+  padding-bottom: var(--mh-safe-bottom);
+}
+
+/* Thanh nhập tin nhắn cố định phía dưới, tự né thanh điều hướng + safe area */
+.mh-chat-input-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: calc(56px + var(--mh-safe-bottom));
+  max-width: var(--mh-content-max);
+  margin: 0 auto;
+  background: #fff;
+  border-top: 1px solid #eee;
+  padding: 8px 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 50;
+}
+
+.mh-chat-page {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.mh-chat-page .mh-chat-input-bar {
+  left: 0;
+  right: 0;
+}
+
+/* Trang đăng nhập: giới hạn bề rộng khối form trên màn hình lớn */
+.mh-login-page {
+  max-width: none !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+/* Ảnh, icon không bao giờ tràn khỏi khung chứa trên màn hình nhỏ */
+img,
+svg {
+  max-width: 100%;
+}
+
+/* Header của Zalo (zmp-ui) là position: fixed, cao 44px + vùng an toàn phía trên.
+   Chừa chỗ cho nó để nội dung đầu trang không bị che, và cho phép trang cuộn lên xuống bình thường. */
+.page.mh-with-header {
+  padding-top: calc(var(--zaui-safe-area-inset-top, 0px) + 44px + 12px);
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Màn hình chat 1-1: khung tin nhắn tự cuộn, nên trang ngoài không cuộn */
+.page.mh-chat-page.mh-with-header {
+  overflow-y: hidden;
+}
+
+/* Nút nổi (FAB) thêm mới, nằm phía trên thanh menu dưới cùng */
+.mh-fab {
+  position: fixed;
+  right: 16px;
+  bottom: calc(72px + var(--mh-safe-bottom));
+  width: 52px;
+  height: 52px;
+  border-radius: 999px;
+  background: #1f2a56;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 60;
+}

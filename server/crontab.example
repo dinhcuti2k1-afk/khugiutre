@@ -1,0 +1,5 @@
+# Ví dụ cấu hình crontab hệ thống (phương án DỰ PHÒNG thay cho node-cron trong thueapibank-sync.js)
+# Cài đặt: chạy `crontab -e` rồi dán dòng dưới (sửa lại đường dẫn cho đúng server của bạn)
+#
+# Quét giao dịch TheAPIBank mỗi 5 phút:
+*/5 * * * * cd /duong-dan-toi/khu-gi-tr-moon-house/server && /usr/bin/node src/cron/poll-once.js >> /var/log/moon-house-thueapibank-cron.log 2>&1

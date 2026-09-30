@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: moon-house-server
+    runtime: node
+    rootDir: server
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: PORT
+        value: 4000
+      - key: CORS_ORIGIN
+        value: "*"
+      - key: INTERNAL_API_TOKEN
+        sync: false
+      - key: SEPAY_WEBHOOK_TOKEN
+        sync: false
+      - key: THUEAPIBANK_BASE_URL
+        value: https://thueapibank.vn
+      - key: THUEAPIBANK_API_TOKEN
+        sync: false
+      - key: THUEAPIBANK_CRON_INTERVAL_MINUTES
+        value: 5

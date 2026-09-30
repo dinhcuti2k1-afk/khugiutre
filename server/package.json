@@ -1,0 +1,20 @@
+{
+  "name": "moon-house-server",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Backend đồng bộ dữ liệu cho Zalo Mini App Khu giữ trẻ Moon House",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "cron:thueapibank": "node src/cron/thueapibank-sync.js",
+    "cron:thueapibank:once": "node src/cron/poll-once.js"
+  },
+  "dependencies": {
+    "axios": "^1.7.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "node-cron": "^3.0.3"
+  }
+}
